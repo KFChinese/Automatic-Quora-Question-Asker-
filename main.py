@@ -52,10 +52,10 @@ def automation():
 
     driver = webdriver.Chrome()
     driver.get("https://www.facebook.com")
-    element = driver.find_element_by_id("email")
+    element = driver.find_element("id", "email")
     element.send_keys(user_name)
 
-    element = driver.find_element_by_id("pass")
+    element = driver.find_element("id", "pass")
     try:
         element.send_keys(password)
         element.send_keys(Keys.RETURN)
@@ -75,15 +75,17 @@ def automation():
 
     sleep(5)
 
-    Question_button = driver.find_elements_by_xpath(
-        '//*[@id="root"]/div/div/div[3]/div/div/div[2]/div/div[1]/div/div/div[2]'
+    Question_button = driver.find_element(
+        "xpath",
+        '//*[@id="root"]/div/div/div[3]/div/div/div[2]/div/div[1]/div/div/div[2]',
     )[0]
     Question_button.click()
     sleep(3)
     with open("Question.txt", "r") as f:
         lines = f.readlines()
-        inputElement = driver.find_element_by_xpath(
-            '//textarea[@placeholder = \'Start your question with "What", "How", "Why", etc.\']'
+        inputElement = driver.find_element(
+            "xpath",
+            '//textarea[@placeholder = \'Start your question with "What", "How", "Why", etc.\']',
         )
         try:
             inputElement.send_keys(lines)
